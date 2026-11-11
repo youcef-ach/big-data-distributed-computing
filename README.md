@@ -153,3 +153,4 @@ hadoop jar target/wordcount-1.0-SNAPSHOT.jar tp.WordCount /hdfs/input/path /hdfs
 1. **Streaming Delimiters:** In Hadoop streaming, TSV (`\t`) is the canonical wire delimiter. Key parsers are configured to strictly split on tabs to support multi-word tokens (e.g. store names like "San Jose" or merchandise categories like "Men's Clothing").
 2. **Memory Bounds:** Reducers maintain strict $O(1)$ memory usage by relying on Hadoop's distributed external merge sort to guarantee all values for key $k_i$ arrive contiguously before key $k_{i+1}$.
 3. **Partition Pruning:** In Spark DataFrame workflows, filter predicates are pushed down to the storage layer before shuffle stages to minimize network I/O.
+
