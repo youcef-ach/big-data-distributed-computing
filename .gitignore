@@ -1,0 +1,32 @@
+# Python Bytecode & Pytest
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Java / Maven build output
+target/
+*.class
+*.jar
+*.war
+*.ear
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+
+# Heavy raw datasets (sample files are provided in-repo)
+purchases.txt
+*.zip
+*.tar.gz
+
+# IDE and OS metadata
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
