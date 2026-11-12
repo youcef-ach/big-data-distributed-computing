@@ -29,5 +29,5 @@ for line in sys.stdin:
         total_sales = cost
 
 # Print the final store after the loop finishes
-if current_store == store:
+if current_store is not None:
     print('%s\t%s' % (current_store, total_sales))

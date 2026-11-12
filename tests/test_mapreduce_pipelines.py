@@ -17,6 +17,16 @@ EVENT_REDUCER = ROOT / "python_mapreduce" / "advanced_aggregations" / "reducer_4
 
 
 class TestBigDataMapReducePipelines(unittest.TestCase):
+    def test_reducers_emit_nothing_for_empty_input(self):
+        for reducer in [WC_REDUCER, SALES_REDUCER]:
+            with self.subTest(reducer=reducer.name):
+                proc = subprocess.run([sys.executable, str(reducer)], input='', capture_output=True, text=True, check=True)
+                self.assertEqual(proc.stdout, '')
+
+    def test_wordcount_skips_malformed_rows(self):
+        proc = subprocess.run([sys.executable, str(WC_REDUCER)], input='\nmalformed\nword\tnot-a-number\nvalid\t2\n', capture_output=True, text=True, check=True)
+        self.assertEqual(proc.stdout, 'valid\t2\n')
+
     def test_wordcount_mapper_output(self):
         input_data = "Distributed computing with Hadoop\nMapReduce streaming with Python"
         proc = subprocess.run(
@@ -80,7 +90,7 @@ class TestBigDataMapReducePipelines(unittest.TestCase):
         if not PURCHASES_SAMPLE.exists():
             self.skipTest("purchases_sample.txt not found")
 
-        with open(PURCHASES_SAMPLE, "r", encoding="utf-8") as f:
+        with open(PURCHASES_SAMPLE, "r", encoding="utf-8-sig") as f:
             raw_data = f.read()
 
         # Step 1: Map

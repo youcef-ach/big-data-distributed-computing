@@ -10,10 +10,8 @@ for line in sys.stdin:
     line = line.strip()
 
     # Parse the input we got from mapper.py
-    word, count = line.split('\t', 1)
-
-    # Convert count (string) to int
     try:
+        word, count = line.split('\t', 1)
         count = int(count)
     except ValueError:
         continue
@@ -29,5 +27,5 @@ for line in sys.stdin:
         current_word = word
 
 # Don't forget to output the last word if needed!
-if current_word == word:
+if current_word is not None:
     print('%s\t%s' % (current_word, current_count))
